@@ -10,22 +10,44 @@ import { Ionicons } from '@expo/vector-icons';
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
+    title: 'Développeur informatique',
+    img: require('../assets/dev.png')
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
+    title: 'Juge',
+    img: require('../assets/lawyer.png')
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
+    title: 'Architecte',
+    img: require('../assets/architect.png')
+  },
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53a5528ba',
+    title: 'Développeur informatique',
+    img: require('../assets/dev.png')
+  },
+  {
+    id: '3ac68afc-c605-25d3-a4f8-fbd91aa97f63',
+    title: 'Juge',
+    img: require('../assets/lawyer.png')
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-14557f559d72',
+    title: 'Architecte',
+    img: require('../assets/architect.png')
   },
 ];
 
-const Item = ({ title }) => (
+const Item = ({ title, img }) => (
   <View style={styles.item}>
-    <Image />
-    <Text style={styles.title}>{title}</Text>
+    <View style={{backgroundColor:'#fff', width:'40%', height:70, borderRadius:10, justifyContent:'center', alignItems:'center' }}>
+      <Image source={img} style={{width:80, height: 70}} />
+    </View>
+    <View style={{position:'relative', left:'20%', flexShrink:1}}>
+      <Text style={{alignSelf:'center', fontSize:15, fontWeight:'700'}}>{title}</Text>
+    </View>
   </View>
 );
 
@@ -35,7 +57,7 @@ const Metier = () => {
   const img = require("../assets/med.png")
 
   const renderItem = ({ item }) => (
-    <Item title={item.title} />
+    <Item title={item.title} img={item.img} />
   );
 
   return (
@@ -57,16 +79,17 @@ const Metier = () => {
           }
         </View>
       </View>
-      <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingHorizontal:25, marginTop:'10%'}}>
+      <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingHorizontal:15, marginTop:'10%'}}>
         <Text style={{fontWeight:'700'}}>Liste des métiers</Text>
         <View style={{borderWidth:1, width:150, height:0, borderColor:'#DADADA', backgroundColor:'#DADADA'}} />
         <Ionicons name="md-search-outline" size={24} color="black" />
       </View>
-      <View style={{paddingHorizontal:25}}>
+      <View style={{paddingHorizontal:15, marginTop:'2%', height:325,}}>
         <FlatList
           data={DATA}
           renderItem={renderItem}
           keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
@@ -86,10 +109,11 @@ const styles = StyleSheet.create({
   item:{
     flexDirection:'row',
     backgroundColor:"#DADADA",
-    paddingVertical:'10%',
+    paddingVertical:'3%',
     marginVertical:'3%',
     alignItems:'center',
-    padding:'5%'
+    padding:'3%',
+    borderRadius:10,
   }
 })
 
