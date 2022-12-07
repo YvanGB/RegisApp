@@ -105,7 +105,7 @@ const Storylist = () =>{
             customSwipeUpComponent={<View>
                                 <Text>Swipe</Text>
                             </View>}
-            style={{marginTop: 30,}}
+            style={{marginTop:'-10%'}}
             avatarSize={55}
             />
     )

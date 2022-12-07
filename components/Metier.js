@@ -62,8 +62,9 @@ const Metier = () => {
 
   return (
     <View style={styles.container}>
+      <Image style={{width:170, height:120, alignSelf:'center', top:'-2.%'}} source={require("../assets/MO5.png")} />
       <Storylist />
-      <View style={{justifyContent:'center', alignItems:'center', alignSelf:'center', marginTop:'10%'}}>
+      <View style={{justifyContent:'center', alignItems:'center', alignSelf:'center', marginTop:'8%'}}>
         <View style={{backgroundColor:'#047FEE', width:330, height:155, borderRadius:20, alignItems:'center'}}>
           {
             metier == "Médecin" ? 
@@ -79,12 +80,12 @@ const Metier = () => {
           }
         </View>
       </View>
-      <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingHorizontal:15, marginTop:'10%'}}>
+      <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingHorizontal:15, marginTop:'3%'}}>
         <Text style={{fontWeight:'700'}}>Liste des métiers</Text>
         <View style={{borderWidth:1, width:150, height:0, borderColor:'#DADADA', backgroundColor:'#DADADA'}} />
         <Ionicons name="md-search-outline" size={24} color="black" />
       </View>
-      <View style={{paddingHorizontal:15, marginTop:'2%', height:325,}}>
+      <View style={{paddingHorizontal:15, marginTop:'0%', height:330,}}>
         <FlatList
           data={DATA}
           renderItem={renderItem}

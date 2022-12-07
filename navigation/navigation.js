@@ -7,6 +7,8 @@ import Connexion from "../components/Connexion";
 import Inscription from "../components/Inscription";
 import Page from "../components/Page";
 import Metier from "../components/Metier";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 
 const Stack = createNativeStackNavigator ();
 
@@ -29,6 +31,8 @@ const StackAuth = () => {
   
   }
 
+
+  
 const Navigation = () =>{
     return(
         <NavigationContainer>
