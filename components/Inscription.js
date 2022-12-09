@@ -75,7 +75,7 @@ const Inscription = () => {
         </View>
       
       <View style={styles.buttonView}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Metier")} >
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("MainPage")} >
           <Text style={{color:'white'}}>S'inscrire</Text>
         </TouchableOpacity>
       </View>

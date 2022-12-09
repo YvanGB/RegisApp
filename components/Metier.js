@@ -1,11 +1,10 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View, FlatList } from "react-native";
+import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity } from "react-native";
 import {Foundation} from '@expo/vector-icons'
 import Storylist from "./storylist/storylist";
 import { StatusBar } from "expo-status-bar";
 import Constants from "expo-constants"
 import { Ionicons } from '@expo/vector-icons';
-
 
 const DATA = [
   {
@@ -83,7 +82,9 @@ const Metier = () => {
       <View style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingHorizontal:15, marginTop:'3%'}}>
         <Text style={{fontWeight:'700'}}>Liste des métiers</Text>
         <View style={{borderWidth:1, width:150, height:0, borderColor:'#DADADA', backgroundColor:'#DADADA'}} />
-        <Ionicons name="md-search-outline" size={24} color="black" />
+        <TouchableOpacity>
+          <Ionicons name="md-search-outline" size={24} color="black" />
+        </TouchableOpacity>
       </View>
       <View style={{paddingHorizontal:15, marginTop:'0%', height:330,}}>
         <FlatList
@@ -99,7 +100,7 @@ const Metier = () => {
 
 const styles = StyleSheet.create({
   container:{
-    paddingTop: Constants.statusBarHeight
+    paddingTop: Constants.statusBarHeight,
   },
   texteMetier:{
     color:'#fff',
