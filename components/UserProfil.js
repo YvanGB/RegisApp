@@ -4,26 +4,37 @@ import { AntDesign, MaterialCommunityIcons, Feather, MaterialIcons, Entypo } fro
 import { Header } from 'react-native-elements';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Avatar } from 'react-native-paper';
-;
+import Constants from "expo-constants";
+import { getAuth, signOut } from "firebase/auth";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const UserProfil = (props) =>{
+
+    const auth = getAuth();
+    const signout = () => signOut(auth).then(() => {
+  // Sign-out successful.
+    }).catch((error) => {
+  // An error happened.
+    });
 
     const CustomRightComponent = ()=>{
         return(
             <TouchableOpacity onPress={()=>props.navigation.navigate('ModifProfil')}>
-                <Text style={{color:"#047FEE", fontSize:17}}>Modifier</Text>
+                <Text style={{color:"#047FEE", position:'absolute',bottom:0,right:0, fontSize:17}}>Modifier</Text>
             </TouchableOpacity>
         )
     }
 
     const CustomCenterComponent = () =>{
       return(
-        <Text style={{color:'#047FEE', fontSize:22, fontWeight:'700'}}>Profil</Text>
+        <Text style={{position:'absolute',bottom:0, color:'#047FEE', fontSize:22, fontWeight:'700'}}>Profil</Text>
       )
     }
 
     return(
-        <View style={{height:'100%', width:'100%', backgroundColor:'white'}}>
+        <View style={{flex:1,paddingTop: Constants.statusBarHeight, backgroundColor:'white'}}>
             <Header 
                 centerComponent={() => <CustomCenterComponent />}
                 rightComponent={()=> <CustomRightComponent /> }
@@ -31,11 +42,11 @@ const UserProfil = (props) =>{
                     backgroundColor:'white',
                     borderBottomWidth:1,
                     borderBottomColor:'rgba(0,0,0,0.2)',
-                    paddingVertical:15
+                    height:50
                 }}
             />
 
-                <View style={{height:'75%',backgroundColor:'#047FEE', marginTop:'30%', borderRadius:20, alignItems:'center'}}>
+                <View style={{flex:2,backgroundColor:'#047FEE', marginTop:'30%', borderRadius:20, alignItems:'center'}}>
                     <View style={{justifyContent:'center', alignItems:'center', alignSelf:'center', height:120, width:120, borderRadius:60, backgroundColor:'#C4C4C4', top:'-10%'}}>
                     </View>
                     <View>
@@ -48,7 +59,7 @@ const UserProfil = (props) =>{
                         <Text style={{marginLeft:'2%'}}></Text>
                     </View>                   
                     <View style={{marginTop:'10%',}}>
-                        <TouchableOpacity style={{flexDirection:'row', borderRadius:10, borderColor:'black', borderWidth:1, paddingVertical:'3%', paddingHorizontal:'15%'}}>
+                        <TouchableOpacity onPress={()=>signout()} style={{flexDirection:'row', borderRadius:10, borderColor:'black', borderWidth:1, paddingVertical:'3%', paddingHorizontal:'15%'}}>
                             <Text style={{fontSize:15}}>Déconnexion</Text>
                         </TouchableOpacity>
                     </View>
@@ -94,11 +105,10 @@ const ModifProfil = (props)=>{
 
     return(
         <View style={{
-            flex:1,
-            width: WIDTH,
-            height: HEIGHT,
+            paddingTop: Constants.statusBarHeight,
+            height:'100%',
+            width:'100%',
             alignItems:'center',
-            paddingVertical:30,
             backgroundColor:'white'
         }}>
             <Header 
@@ -107,7 +117,6 @@ const ModifProfil = (props)=>{
                 rightComponent={()=>(<CustomRightComponent />)}
                 containerStyle={{
                     backgroundColor:'white',
-                    top:-20,
                     borderBottomWidth:1,
                     borderBottomColor:'rgba(0,0,0,0.2)'
                 }}
@@ -121,7 +130,7 @@ const ModifProfil = (props)=>{
                     marginTop:50,
                     paddingHorizontal:20
                 }}>
-                    <Text style={{fontSize:13,opacity:0.5, marginVertical:5, textAlignVertical:'top'}}></Text>
+                    <Text style={{fontSize:13,opacity:0.5, marginVertical:5, textAlignVertical:'top'}}>Prénoms</Text>
                     <TextInput />
                 </View>
 
@@ -133,20 +142,8 @@ const ModifProfil = (props)=>{
                     marginTop:30,
                     paddingHorizontal:20
                 }}>
-                    <Text style={{fontSize:13,opacity:0.5, marginVertical:5, textAlignVertical:'top'}}>Pr</Text>
+                    <Text style={{fontSize:13,opacity:0.5, marginVertical:5, textAlignVertical:'top'}}>Email</Text>
                     <TextInput />
-                </View>
-
-                <View style={{
-                    backgroundColor:'#EDECEC',
-                    height:70,
-                    width:320,
-                    borderRadius:15,
-                    marginTop:30,
-                    paddingHorizontal:20
-                }}>
-                    <Text style={{fontSize:13,opacity:0.5, marginVertical:5, textAlignVertical:'top'}}>Téléphone</Text>
-                    <TextInput value={tel} onChangeText={(val) => setTel(val)} keyboardType='phone-pad' />
                 </View>
 
 

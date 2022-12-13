@@ -1,11 +1,52 @@
-import React, {useEffect} from "react";
-import { StyleSheet, View, Image, Keyboard, Platform, Text, Pressable, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
+import React, {useEffect, useState} from "react";
+import { StyleSheet, View, Image,AsyncStorage, ActivityIndicator, Keyboard, Platform, Text, Pressable, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
 import { Ionicons, Foundation } from '@expo/vector-icons';
+import Toast from 'react-native-simple-toast'
 import KeyboardAvoidingWrapper from "./KeyboardAvoidingWrapper";
 import { useNavigation } from "@react-navigation/native";
+import app from '../firebase';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const Connexion = () => {
   const navigation = useNavigation()
+
+  const [user, setUser] = useState({
+    email:'',
+    password:''
+  })
+
+  const [userInfo, setUserInfo] = useState("")
+
+  const [showIndicator, setShowIndicator] = useState(false)
+
+  const auth = getAuth(app);
+  const signInUser = (email, password) => {
+
+    if(user.email !== "" && user.password !== ""){
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        setUserInfo(user);
+        Toast.show('Connexion réussie', Toast.LONG);
+        setShowIndicator(false)
+        navigation.navigate('MainPage')
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage)
+      })
+    }else{
+      setTimeout(() => {
+        Toast.show('Champs vides ou informations incorrectes', Toast.LONG)
+        setShowIndicator(false)
+      }, 1500);
+    }
+
+    
+  };
 
 useEffect( () =>{
   console.log(navigation);
@@ -27,6 +68,8 @@ useEffect( () =>{
               <TextInput 
                 placeholder="Email"
                 keyboardType='email-address'
+                value={user.email}
+                onChangeText={(val)=>setUser({...user, email:val})}
                 style={styles.textInput}
               />
             </View>
@@ -34,7 +77,10 @@ useEffect( () =>{
               <Foundation name="key" size={24} color="#047FEE" />
               <TextInput 
                 placeholder="Mot de passe"
-                keyboardType="default"
+                keyboardType='default'
+                secureTextEntry
+                value={user.password}
+                onChangeText={(val)=>setUser({...user, password:val})}
                 style={styles.textInput}
               />
             </View>
@@ -46,8 +92,15 @@ useEffect( () =>{
         </TouchableOpacity>
       </View>
       <View style={styles.buttonView}>
-        <TouchableOpacity style={styles.button} >
-          <Text style={{color:'white'}}>Se connecter</Text>
+        <TouchableOpacity onPress={()=>{
+          setShowIndicator(true)
+          signInUser(user.email, user.password)
+          }} style={styles.button} >
+          {
+            showIndicator 
+            ? <ActivityIndicator animating={showIndicator} color="white" />
+            : <Text style={{color:'white'}}>Se connecter</Text>
+          }
         </TouchableOpacity>
       </View>
 

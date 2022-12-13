@@ -41,7 +41,7 @@ const Page = () => {
       <TouchableOpacity
         style={styles.groupTouchableOpacity2}
         activeOpacity={0.2}
-        onPress={() => navigation.navigate("AndroidLarge5")}
+        onPress={() => navigation.navigate("MainPage")}
       >
         <Text style={styles.continuerSansSinscrire}>Continuer sans s’inscrire</Text>
         <AntDesign style={{left:80}} name="caretright" size={15} color="white" />

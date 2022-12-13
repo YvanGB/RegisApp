@@ -8,17 +8,93 @@ import {
   Text,
   Image,
 } from "react-native";
-// import DropDownPicker from "react-native-dropdown-picker";
+import DropDownPicker from 'react-native-dropdown-picker';
+import uuid from "react-native-uuid";
+import { Dropdown } from 'react-native-element-dropdown';
 import { useNavigation } from "@react-navigation/native";
 import KeyboardAvoidingWrapper from "./KeyboardAvoidingWrapper";
-import { Ionicons, Foundation } from '@expo/vector-icons';
+import { Ionicons, Foundation, FontAwesome5 } from '@expo/vector-icons';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "../firebase";
 
 const Inscription = () => {
   // const [prenomDropdownOpen, setPrenomDropdownOpen] = useState(false);
   // const [prenomDropdownValue, setPrenomDropdownValue] = useState(
   //   "Elève 2nde, Elève 1ère, Elève Tle, Parent d'élève, Visiteur"
   // );
+  const utilisateurs = collection(db, "utilisateurs")
+
   const navigation = useNavigation();
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Elève 2nde', value: 'elv2e'},
+    {label: 'Elève 1ère', value: 'elv1e'},
+    {label: 'Elève Tle', value: 'elvtermo'},
+    {label: 'Parent d\'Elève', value: 'parent'},
+    {label: 'Visiteur', value: 'visiteur'},
+    
+  ]);
+
+  const [showIndicator, setShowIndicator] = useState(false)
+
+  const [userInfo, setUserInfo] = useState("")
+
+  const [user, setUser] = useState({
+    uid:'',
+    prenom:'',
+    profil:'',
+    email:'',
+    profil:value,
+    password:'',
+    confirm_password:''
+  })
+
+  const createUser = async () => {
+    const user = await addDoc(utilisateurs, {
+        uid:uuid.v4(),
+        prenom:user.prenom,
+        email:user.email,
+        profil:user.profil,
+        password:user.password
+    })
+};
+
+
+const auth = getAuth();
+const createNewUser = (email,password) => {
+    if(user.prenom !== "" || user.email !== "" || user.password !== "" || user.confirm_password !== ""){
+      if(user.password === user.confirm_password){
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const createdUser = userCredential.user;
+          setUserInfo(createdUser);
+          createUser();
+          Toast.show('Inscription réussie. Bienvenue.', Toast.LONG);
+          setShowIndicator(false)
+          navigation.navigate('MainPage')
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        })
+      }else{
+        setTimeout(() => {
+          Toast.show('Les mots de passe ne correspondent pas.', Toast.LONG)
+          setShowIndicator(false)
+        }, 1500);
+      }
+      
+    }else{
+      setTimeout(() => {
+        Toast.show('Au moins un champs vide', Toast.LONG)
+        setShowIndicator(false)
+      }, 1500);
+    }
+};
 
   return (
     <KeyboardAvoidingWrapper>
@@ -33,19 +109,33 @@ const Inscription = () => {
       
         <View style={styles.form}>
             <View style={styles.fieldRect}>
-              <Ionicons name="mail" size={24} color="#047FEE" />
+              <FontAwesome5 name="user-alt" size={22} color="#047FEE" />
               <TextInput 
                 placeholder="Prenom"
-                keyboardType='email-address'
+                keyboardType='default'
+                value={user.prenom}
+                onChangeText={(val) => setUser({...user, prenom:val})}
                 style={styles.textInput}
               />
             </View>
-            <View style={styles.fieldRect}>
-              <Foundation name="key" size={24} color="#047FEE" />
-              <TextInput 
+            <View style={[styles.fieldRect,{height:52}]}>
+              <FontAwesome5 name="briefcase" size={24} color="#047FEE" />
+              <DropDownPicker
+                dropDownContainerStyle={{
+                  backgroundColor: "#dfdfdf"
+                }}
+                dropDownDirection='TOP'
+                listMode='FLATLIST'
+                listItemContainerStyle={{backgroundColor:'white'}}          
                 placeholder="Profil"
-                keyboardType="default"
-                style={styles.textInput}
+                style={{marginVertical:'4%', width:250, borderColor:'white'}}
+                placeholderStyle={{color:'gray'}}
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
               />
             </View>
             <View style={styles.fieldRect}>
@@ -53,6 +143,8 @@ const Inscription = () => {
               <TextInput 
                 placeholder="Email"
                 keyboardType='email-address'
+                value={user.email}
+                onChangeText={(val) => setUser({...user, email:val})}
                 style={styles.textInput}
               />
             </View>
@@ -61,22 +153,39 @@ const Inscription = () => {
               <TextInput 
                 placeholder="Mot de passe"
                 keyboardType="default"
+                value={user.password}
+                onChangeText={(val) => setUser({...user, password:val})}
+                secureTextEntry
                 style={styles.textInput}
               />
             </View>
             <View style={styles.fieldRect}>
               <Foundation name="key" size={24} color="#047FEE" />
               <TextInput 
-                placeholder="Mot de passe"
+                placeholder="Confirmer mot de passe"
                 keyboardType="default"
+                value={user.confirm_password}
+                onChangeText={(val) => setUser({...user, confirm_password:val})}
+                secureTextEntry
                 style={styles.textInput}
               />
             </View>
         </View>
       
       <View style={styles.buttonView}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("MainPage")} >
-          <Text style={{color:'white'}}>S'inscrire</Text>
+        <TouchableOpacity 
+          style={styles.button} 
+          // onPress={() =>{
+          //   setShowIndicator(true)
+          //   createNewUser(user.email, user.password)
+          // }} 
+          onPress={() => console.log(user)}
+          >
+            {
+              showIndicator 
+              ? <ActivityIndicator animating={showIndicator} color="white" />
+              :<Text style={{color:'white'}}>S'inscrire</Text>
+            } 
         </TouchableOpacity>
       </View>
 
@@ -96,7 +205,8 @@ const styles = StyleSheet.create({
   container:{
     flex:1,
     margin:15,
-    paddingTop:15
+    paddingTop:15,
+    backgroundColor:'white'
   },
   textInput:{
     width:'80%',
@@ -108,14 +218,24 @@ const styles = StyleSheet.create({
     borderColor:"#161616",
     borderRadius:10,
     flexDirection:'row',
-    height:40,
+    height:52,
     alignItems:'center',
     paddingLeft:'4%',
     marginVertical:'4%',
 
   },
+  profilRect:{
+    borderWidth:1,
+    borderColor:"#161616",
+    borderRadius:10,
+    flexDirection:'row',
+    height:40,
+    alignItems:'center',
+    paddingLeft:'4%',
+    marginVertical:'4%',
+  },
   form:{
-    marginTop:'8%',
+    marginTop:'3%',
     marginHorizontal:'5%'
   },
   button:{
@@ -126,7 +246,7 @@ const styles = StyleSheet.create({
   },
   buttonView:{
     alignSelf:'center',
-    marginTop:'7%'
+    marginTop:'5%'
   }
 })
 

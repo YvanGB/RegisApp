@@ -1,6 +1,7 @@
 import { ScrollView, Pressable, StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicatorBase } from 'react-native'
 import React from 'react';
 import InstaStory from 'react-native-insta-story';
+import { AntDesign } from '@expo/vector-icons';
 
 
 const data = [
@@ -105,8 +106,10 @@ const Storylist = () =>{
             customSwipeUpComponent={<View>
                                 <Text>Swipe</Text>
                             </View>}
+            customCloseComponent={<AntDesign name="closesquareo" size={20} color="white" />}
             style={{marginTop:'-10%'}}
             avatarSize={55}
+            avatarTextStyle={{color:'#0B2E5E'}}
             />
     )
 }
