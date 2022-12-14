@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "RegisApp",
+    "name": "Mon Orientation",
     "slug": "RegisApp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,8 +21,9 @@
       "supportsTablet": true
     },
     "android": {
+      "icon":"./assets/logo96x96.png",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/logo96x96.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.yvan_gb.RegisApp"
