@@ -15,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import KeyboardAvoidingWrapper from "./KeyboardAvoidingWrapper";
 import { Ionicons, Foundation, FontAwesome5 } from '@expo/vector-icons';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {collection, addDoc} from "firebase/firestore"
 import { db } from "../firebase";
 
 const Inscription = () => {
@@ -52,7 +53,7 @@ const Inscription = () => {
   })
 
   const createUser = async () => {
-    const user = await addDoc(utilisateurs, {
+    await addDoc(utilisateurs, {
         uid:uuid.v4(),
         prenom:user.prenom,
         email:user.email,
@@ -175,11 +176,10 @@ const createNewUser = (email,password) => {
       <View style={styles.buttonView}>
         <TouchableOpacity 
           style={styles.button} 
-          // onPress={() =>{
-          //   setShowIndicator(true)
-          //   createNewUser(user.email, user.password)
-          // }} 
-          onPress={() => console.log(user)}
+          onPress={() =>{
+            setShowIndicator(true)
+            createNewUser(user.email, user.password)
+          }} 
           >
             {
               showIndicator 

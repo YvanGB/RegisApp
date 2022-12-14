@@ -9,6 +9,7 @@ import Page from "../components/Page";
 import Metier from "../components/Metier";
 import UserProfil from "../components/UserProfil";
 import Favoris from "../components/Favoris";
+// import MyStory from "../components/MyStory";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Foundation, Fontisto, FontAwesome5, Feather } from '@expo/vector-icons';
 import { Dimensions } from 'react-native';
@@ -120,6 +121,12 @@ const Navigation = () =>{
                     component={Tabs}
                     options={{ headerShown: false, }}
                 />
+
+                {/* <Stack.Screen 
+                    name="MyStory"
+                    component={MyStory}
+                    options={{headerShow:false}}
+                /> */}
             </Stack.Navigator>
 
         </NavigationContainer>

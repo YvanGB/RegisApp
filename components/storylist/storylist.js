@@ -3,96 +3,71 @@ import React from 'react';
 import InstaStory from 'react-native-insta-story';
 import { AntDesign } from '@expo/vector-icons';
 
-
 const data = [
     {
         id: 1,
-        user_image: 'https://img.freepik.com/photos-gratuite/portrait-menuisier-professionnel-age-moyen-planche-bois-outils-debout-dans-son-atelier-menuiserie_342744-822.jpg?w=740&t=st=1670191494~exp=1670192094~hmac=65ff776a3566f168cc99d72dffbfc2bc7343bddde6665e559dd61a7ffd33036d',
+        user_image: 'https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/docteur.png?alt=media&token=30b285dc-85ea-41e2-80f5-48da5bc18914',
         user_name: "Lundi",
         stories: [
             {
                 story_id: 1,
-                story_image: "https://image.freepik.com/free-vector/universe-mobile-wallpaper-with-planets_79603-600.jpg",
+                story_image: "https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/docteur.png?alt=media&token=30b285dc-85ea-41e2-80f5-48da5bc18914",
                 swipeText:'Custom swipe text for this story',
                 onPress: () => console.log('story 1 swiped'),
             },
             {
                 story_id: 2,
-                story_image: "https://image.freepik.com/free-vector/mobile-wallpaper-with-fluid-shapes_79603-601.jpg",
+                story_image: "https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/docteur.png?alt=media&token=30b285dc-85ea-41e2-80f5-48da5bc18914",
             }]
     },
     {
         id: 2,
-        user_image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
+        user_image: 'https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/med.png?alt=media&token=2dbcd6db-e8c5-4f68-b9ba-b579162797d6',
         user_name: "Mardi",
         stories: [
             {
                 story_id: 1,
-                story_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjORKvjcbMRGYPR3QIs3MofoWkD4wHzRd_eg&usqp=CAU",
-                swipeText:'Custom swipe text for this story',
+                story_image: "https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/med.png?alt=media&token=2dbcd6db-e8c5-4f68-b9ba-b579162797d6",
+                swipeText:'',
                 onPress: () => console.log('story 1 swiped'),
             },
             {
                 story_id: 2,
-                story_image: "https://files.oyebesmartest.com/uploads/preview/vivo-u20-mobile-wallpaper-full-hd-(1)qm6qyz9v60.jpg",
-                swipeText:'Custom swipe text for this story',
+                story_image: "https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/med.png?alt=media&token=2dbcd6db-e8c5-4f68-b9ba-b579162797d6",
+                swipeText:'',
                 onPress: () => console.log('story 2 swiped'),
             }]
     },
     {
         id: 3,
-        user_image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
+        user_image: 'https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/med.png?alt=media&token=2dbcd6db-e8c5-4f68-b9ba-b579162797d6',
         user_name: "Mercredi",
         stories: [
             {
                 story_id: 1,
-                story_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjORKvjcbMRGYPR3QIs3MofoWkD4wHzRd_eg&usqp=CAU",
-                swipeText:'Custom swipe text for this story',
+                story_image: "https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/med.png?alt=media&token=2dbcd6db-e8c5-4f68-b9ba-b579162797d6",
+                swipeText:'',
                 onPress: () => console.log('story 1 swiped'),
             },
             {
                 story_id: 2,
-                story_image: "https://files.oyebesmartest.com/uploads/preview/vivo-u20-mobile-wallpaper-full-hd-(1)qm6qyz9v60.jpg",
-                swipeText:'Custom swipe text for this story',
+                story_image: "https://firebasestorage.googleapis.com/v0/b/monorientation-8f782.appspot.com/o/med.png?alt=media&token=2dbcd6db-e8c5-4f68-b9ba-b579162797d6",
+                swipeText:'',
                 onPress: () => console.log('story 2 swiped'),
             }]
     },
-    {
-        id: 4,
-        user_image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
-        user_name: "Jeudi",
-        stories: [
-            {
-                story_id: 1,
-                story_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjORKvjcbMRGYPR3QIs3MofoWkD4wHzRd_eg&usqp=CAU",
-                swipeText:'Custom swipe text for this story',
-                onPress: () => console.log('story 1 swiped'),
-            },
-            {
-                story_id: 2,
-                story_image: "https://files.oyebesmartest.com/uploads/preview/vivo-u20-mobile-wallpaper-full-hd-(1)qm6qyz9v60.jpg",
-                swipeText:'Custom swipe text for this story',
-                onPress: () => console.log('story 2 swiped'),
-            }]
-    },
-    {
-        id: 5,
-        user_image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
-        user_name: "Vendredi",
-        stories: [
-            {
-                story_id: 1,
-                story_image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjORKvjcbMRGYPR3QIs3MofoWkD4wHzRd_eg&usqp=CAU",
-                swipeText:'Custom swipe text for this story',
-                onPress: () => console.log('story 1 swiped'),
-            },
-            {
-                story_id: 2,
-                story_image: "https://files.oyebesmartest.com/uploads/preview/vivo-u20-mobile-wallpaper-full-hd-(1)qm6qyz9v60.jpg",
-                swipeText:'Custom swipe text for this story',
-                onPress: () => console.log('story 2 swiped'),
-            }]
-    }
+    // {
+    //     id: 4,
+    //     // user_image: '',
+    //     user_name: "Jeudi",
+    //     stories: []
+    // },
+    // {
+    //     id: 5,
+    //     // user_image: '',
+    //     user_name: "Vendredi",
+    //     // stories: []
+    // }
 
 ];
 
@@ -103,9 +78,6 @@ const Storylist = () =>{
             duration={10}
             onStart={item => console.log(item)}
             onClose={item => console.log('close: ', item)}
-            customSwipeUpComponent={<View>
-                                <Text>Swipe</Text>
-                            </View>}
             customCloseComponent={<AntDesign name="closesquareo" size={20} color="white" />}
             style={{marginTop:'-10%'}}
             avatarSize={55}

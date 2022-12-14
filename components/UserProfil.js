@@ -1,6 +1,6 @@
 import React, {useEffect, ef, useState, useContext } from 'react';
 import { View, Text, Image, TouchableOpacity, Dimensions, TextInput, ScrollView, Animated, Modal, ActivityIndicator } from 'react-native';
-import { AntDesign, MaterialCommunityIcons, Feather, MaterialIcons, Entypo } from '@expo/vector-icons';
+import { AntDesign, MaterialCommunityIcons, Feather, MaterialIcons, Entypo, Ionicons } from '@expo/vector-icons';
 import { Header } from 'react-native-elements';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Avatar } from 'react-native-paper';
@@ -33,6 +33,9 @@ const UserProfil = (props) =>{
       )
     }
 
+    const [email, setEmail] = useState("regis@gmail.com")
+    const [eleve, setElve] = useState("élève")
+
     return(
         <View style={{flex:1,paddingTop: Constants.statusBarHeight, backgroundColor:'white'}}>
             <Header 
@@ -49,14 +52,13 @@ const UserProfil = (props) =>{
                 <View style={{flex:2,backgroundColor:'#047FEE', marginTop:'30%', borderRadius:20, alignItems:'center'}}>
                     <View style={{justifyContent:'center', alignItems:'center', alignSelf:'center', height:120, width:120, borderRadius:60, backgroundColor:'#C4C4C4', top:'-10%'}}>
                     </View>
-                    <View>
-                        <Text style={{alignSelf:'center', color:'white', fontSize:18}}></Text>
-                    </View>
                     <View style={{height:'10%', width:'85%', flexDirection:'row', backgroundColor:'white', borderRadius:10, justifyContent:'center', alignItems:'center', marginBottom:'15%'}}>
-                        <Text style={{marginLeft:'2%'}}></Text>
+                    <Ionicons name="mail" size={24} color="black" />
+                        <Text style={{marginLeft:'2%', fontSize:16}}>{email}</Text>
                     </View>
                     <View style={{height:'10%', width:'85%', flexDirection:'row', backgroundColor:'white', borderRadius:10, justifyContent:'center', alignItems:'center'}}>
-                        <Text style={{marginLeft:'2%'}}></Text>
+                        <Entypo name="briefcase" size={24} color="black" />
+                        <Text style={{marginLeft:'2%', fontSize:16}}>{eleve}</Text>
                     </View>                   
                     <View style={{marginTop:'10%',}}>
                         <TouchableOpacity onPress={()=>signout()} style={{flexDirection:'row', borderRadius:10, borderColor:'black', borderWidth:1, paddingVertical:'3%', paddingHorizontal:'15%'}}>
@@ -102,6 +104,8 @@ const ModifProfil = (props)=>{
             </TouchableOpacity>
         )
     }
+
+    
 
     return(
         <View style={{
